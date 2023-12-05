@@ -8,30 +8,30 @@ import java.util.List;
 
 public interface HitRepository extends JpaRepository<Hit, Long> {
 
-    @Query("select new ru.practicum.HitStatsDto(s.app, s.uri, count(s.uri)) " +
+    @Query("select new ru.practicum.ViewStats(s.app, s.uri, count(s.uri)) " +
             "from Hit s where s.timestamp between ?1 and ?2 " +
             "group by s.app, s.uri " +
             "order by count(s.uri) desc")
-    List<HitStatsDto> getHits(LocalDateTime start, LocalDateTime end);
+    List<ViewStats> getHits(LocalDateTime start, LocalDateTime end);
 
-    @Query("select new ru.practicum.HitStatsDto(s.app, s.uri, count(s.uri)) " +
+    @Query("select new ru.practicum.ViewStats(s.app, s.uri, count(s.uri)) " +
             "from Hit s where s.timestamp between ?1 and ?2 and s.uri in ?3 " +
             "group by s.app, s.uri " +
             "order by count(s.uri) desc")
-    List<HitStatsDto> getHitsUris(LocalDateTime start, LocalDateTime end, List<String> uris);
+    List<ViewStats> getHitsUris(LocalDateTime start, LocalDateTime end, List<String> uris);
 
 
-    @Query("select new ru.practicum.HitStatsDto(s.app, s.uri, count(distinct s.ip)) " +
+    @Query("select new ru.practicum.ViewStats(s.app, s.uri, count(distinct s.ip)) " +
             "from Hit s where s.timestamp between ?1 and ?2 " +
             "group by s.app, s.uri " +
             "order by count(s.uri) desc")
-    List<HitStatsDto> getHitsUnique(LocalDateTime start, LocalDateTime end);
+    List<ViewStats> getHitsUnique(LocalDateTime start, LocalDateTime end);
 
-    @Query("select new ru.practicum.HitStatsDto(s.app, s.uri, count(distinct s.ip)) " +
+    @Query("select new ru.practicum.ViewStats(s.app, s.uri, count(distinct s.ip)) " +
             "from Hit s where s.timestamp between ?1 and ?2 and s.uri in ?3 " +
             "group by s.app, s.uri " +
             "order by count(s.uri) desc")
-    List<HitStatsDto> getHitsUrisUnique(LocalDateTime start, LocalDateTime end, List<String> uris);
+    List<ViewStats> getHitsUrisUnique(LocalDateTime start, LocalDateTime end, List<String> uris);
 
 
 }

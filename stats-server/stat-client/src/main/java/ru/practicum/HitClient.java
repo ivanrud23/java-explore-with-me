@@ -33,5 +33,9 @@ public class HitClient extends BaseClient {
         return get("?start={start}&end={end}&uris={uris}&unique={unique}", start, end, uris, unique);
     }
 
+    public ResponseEntity<Object> getHitClear(LocalDateTime start, LocalDateTime end) {
+        return get("?start={start}&end={end}", start, end);
+    }
+
 
 }
