@@ -40,7 +40,6 @@ public class EventServiceImpl implements EventService {
     private final UserRepository userRepository;
     private final LocationRepository locationRepository;
     private final HitClient hitClient;
-    private final StatController statController;
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 
