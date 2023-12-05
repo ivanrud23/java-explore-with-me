@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.HitClient;
+import ru.practicum.HitDto;
 import ru.practicum.model.category.Category;
 import ru.practicum.model.category.CategoryRepository;
 import ru.practicum.model.event.eventDto.EventFullDto;
@@ -190,7 +191,8 @@ public class EventServiceImpl implements EventService {
                                                     Boolean onlyAvailable,
                                                     String sort,
                                                     Integer from,
-                                                    Integer size) {
+                                                    Integer size,
+                                                    HttpServletRequest request) {
         PageRequest page = PageRequest.of(from / size, size);
         List<Event> foundEvents = null;
         List<State> listOfStates = null;
@@ -205,6 +207,12 @@ public class EventServiceImpl implements EventService {
                 throw new ValidationException("rangeEnd не может быть в прошлом");
             }
         }
+        hitClient.createHit(new HitDto(
+                "ewm-main-service",
+                request.getRequestURI(),
+                request.getRemoteAddr(),
+                LocalDateTime.now().format(formatter)
+        ));
         if (text != null
                 && paid != null
                 && rangeStart != null
@@ -264,6 +272,12 @@ public class EventServiceImpl implements EventService {
         if (!event.getState().equals(State.PUBLISHED)) {
             throw new NoDataException("События не существует");
         }
+        hitClient.createHit(new HitDto(
+                "ewm-main-service",
+                request.getRequestURI(),
+                request.getRemoteAddr(),
+                LocalDateTime.now().format(formatter)
+        ));
         return EventMapper.mapToEventFullDto(event, 1);
     }
 

@@ -37,7 +37,8 @@ public interface EventService {
                                              Boolean onlyAvailable,
                                              String sort,
                                              Integer from,
-                                             Integer size);
+                                             Integer size,
+                                             HttpServletRequest request);
 
     EventFullDto getEventByIdPublish(Long eventId, HttpServletRequest request);
 

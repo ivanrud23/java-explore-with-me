@@ -23,6 +23,9 @@ public class HitServiceImpl implements HitService {
     public List<ViewStats> getHit(String startSt, String endSt, List<String> uris, Boolean unique) {
         LocalDateTime start = LocalDateTime.parse(startSt, HitMapper.formatter);
         LocalDateTime end = LocalDateTime.parse(endSt, HitMapper.formatter);
+        if (start.isAfter(end)) {
+            throw new ru.practicum.exeption.ValidationException("Неверно заданы границы диапазона");
+        }
         if (!unique) {
             if (uris == null) {
                 return repository.getHits(start, end);
