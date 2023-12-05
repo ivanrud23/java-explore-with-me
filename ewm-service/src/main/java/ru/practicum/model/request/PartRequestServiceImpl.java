@@ -41,7 +41,7 @@ public class PartRequestServiceImpl implements PartRequestService {
         User user = userRepository.findById(userId).orElseThrow(() -> new NoDataException("Пользователя не существует"));
         Event event = eventRepository.findById(eventId).orElseThrow(() -> new NoDataException("События не существует"));
         if (partRequestRepository.findAll().stream()
-                .anyMatch(partRequest -> partRequest.getEvent().equals(event) & partRequest.getRequester().equals(user))) {
+                .anyMatch(partRequest -> partRequest.getEvent().equals(event) && partRequest.getRequester().equals(user))) {
             throw new AlreadyExistException("Пользователь уже отправил заявку на участие");
         }
         if (event.getInitiator().equals(user)) {
@@ -65,7 +65,7 @@ public class PartRequestServiceImpl implements PartRequestService {
     @Override
     public ParticipationRequestDto cancelPartRequest(Long userId, Long requestId) {
         PartRequest partRequest = partRequestRepository.findById(requestId).orElseThrow(() -> new NoDataException("Запрос не существует"));
-        if (partRequest.getRequester().getId() != userId) {
+        if (!partRequest.getRequester().getId().equals(userId)) {
             throw new ValidationException("Пользователь не создавал указанный запрос");
         }
         partRequest.setStatus(Status.CANCELED);

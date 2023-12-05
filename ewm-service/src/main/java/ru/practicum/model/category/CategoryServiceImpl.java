@@ -47,7 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto updateCategory(Long id, String newName) {
         Category updateCategory = categoryRepository.findById(id).orElseThrow(() -> new NoDataException("Категории не существует"));
         if (categoryRepository.findAll().stream()
-                .anyMatch(category -> category.getName().equals(newName)) & !updateCategory.getName().equals(newName)) {
+                .anyMatch(category -> category.getName().equals(newName)) && !updateCategory.getName().equals(newName)) {
             throw new AlreadyExistException("Категория с таким названием уже существует");
         } else {
             updateCategory.setName(newName);
