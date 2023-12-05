@@ -7,7 +7,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.HitClient;
-import ru.practicum.controller.StatController;
 import ru.practicum.model.category.Category;
 import ru.practicum.model.category.CategoryRepository;
 import ru.practicum.model.event.eventDto.EventFullDto;
