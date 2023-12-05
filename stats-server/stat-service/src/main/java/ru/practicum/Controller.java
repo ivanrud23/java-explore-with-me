@@ -20,10 +20,10 @@ public class Controller {
     }
 
     @GetMapping("/stats")
-    public List getHits(@NonNull @RequestParam String start,
-                        @NonNull @RequestParam String end,
-                        @RequestParam(required = false) List<String> uris,
-                        @RequestParam(defaultValue = "false") Boolean unique
+    public List<ViewStats> getHits(@NonNull @RequestParam String start,
+                                   @NonNull @RequestParam String end,
+                                   @RequestParam(required = false) List<String> uris,
+                                   @RequestParam(defaultValue = "false") Boolean unique
     ) {
         return hitService.getHit(start, end, uris, unique);
     }
