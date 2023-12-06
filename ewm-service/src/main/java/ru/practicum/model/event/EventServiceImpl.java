@@ -164,7 +164,7 @@ public class EventServiceImpl implements EventService {
 
         }
         return StreamSupport.stream(foundEvents.spliterator(), false)
-                .map(event -> EventMapper.mapToEventFullDto(event, 0))
+                .map(event -> EventMapper.mapToEventFullDto(event, 1))
                 .collect(Collectors.toList());
 
     }
