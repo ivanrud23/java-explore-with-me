@@ -107,7 +107,7 @@ public class PartRequestServiceImpl implements PartRequestService {
             }
             request.setStatus(status);
 //            if (event.getRequestModeration()) {
-//                event.setConfirmedRequests(event.getConfirmedRequests() + 1);
+                event.setConfirmedRequests(event.getConfirmedRequests() + 1);
 //            }
         }
 

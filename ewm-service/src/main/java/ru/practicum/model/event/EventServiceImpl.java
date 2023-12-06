@@ -159,12 +159,12 @@ public class EventServiceImpl implements EventService {
             foundEvents = eventRepository.findAll(byUserId, page);
         } else {
             return eventRepository.findAll(page).stream()
-                    .map(event -> EventMapper.mapToEventFullDto(event, 1))
+                    .map(event -> EventMapper.mapToEventFullDto(event, 0))
                     .collect(Collectors.toList());
 
         }
         return StreamSupport.stream(foundEvents.spliterator(), false)
-                .map(event -> EventMapper.mapToEventFullDto(event, 1))
+                .map(event -> EventMapper.mapToEventFullDto(event, 0))
                 .collect(Collectors.toList());
 
     }
