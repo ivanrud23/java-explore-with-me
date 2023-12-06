@@ -221,12 +221,12 @@ public class EventServiceImpl implements EventService {
                 && sort != null) {
             foundEvents = eventRepository.getEventsByAllParam(text, categories, paid, start, end, page);
             if (sort.equals("EVENT_DATE")) {
-                return StreamSupport.stream(foundEvents.spliterator(), false)
+                return foundEvents.stream()
                         .map(event -> EventMapper.mapToEventFullDto(event, 1))
                         .sorted(Comparator.comparing(EventFullDto::getEventDate))
                         .collect(Collectors.toList());
             } else {
-                return StreamSupport.stream(foundEvents.spliterator(), false)
+                return foundEvents.stream()
                         .map(event -> EventMapper.mapToEventFullDto(event, 1))
                         .sorted(Comparator.comparing(EventFullDto::getViews))
                         .collect(Collectors.toList());
@@ -237,7 +237,7 @@ public class EventServiceImpl implements EventService {
                 && rangeEnd != null
                 && onlyAvailable != null) {
             foundEvents = eventRepository.getEventsByTextCatPaid(text, categories, paid, page);
-            return StreamSupport.stream(foundEvents.spliterator(), false)
+            return foundEvents.stream()
                     .map(event -> EventMapper.mapToEventFullDto(event, 1))
                     .collect(Collectors.toList());
         } else if (text != null
@@ -245,18 +245,18 @@ public class EventServiceImpl implements EventService {
                 && rangeStart != null
                 && rangeEnd != null) {
             foundEvents = eventRepository.getEventsByTextCat(text, categories, page);
-            return StreamSupport.stream(foundEvents.spliterator(), false)
+            return foundEvents.stream()
                     .map(event -> EventMapper.mapToEventFullDto(event, 1))
                     .collect(Collectors.toList());
         } else if (text != null
                 && paid != null) {
             foundEvents = eventRepository.getEventsByTextCat(text, categories, page);
-            return StreamSupport.stream(foundEvents.spliterator(), false)
+            return foundEvents.stream()
                     .map(event -> EventMapper.mapToEventFullDto(event, 1))
                     .collect(Collectors.toList());
         } else if (text != null) {
             foundEvents = eventRepository.getEventsByText(text, page);
-            return StreamSupport.stream(foundEvents.spliterator(), false)
+            return foundEvents.stream()
                     .map(event -> EventMapper.mapToEventFullDto(event, 1))
                     .collect(Collectors.toList());
         } else {
