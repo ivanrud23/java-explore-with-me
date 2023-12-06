@@ -106,9 +106,9 @@ public class PartRequestServiceImpl implements PartRequestService {
                 throw new AlreadyExistException("Невозможно подтвердить заявку");
             }
             request.setStatus(status);
-            if (event.getRequestModeration()) {
+//            if (event.getRequestModeration()) {
                 event.setConfirmedRequests(event.getConfirmedRequests() + 1);
-            }
+//            }
         }
 
         List<ParticipationRequestDto> confirmedRequests = partRequestRepository.findByStatusOrderByIdDesc(Status.CONFIRMED).stream()
