@@ -73,8 +73,6 @@ public class CompilationServiceImpl implements CompilationService {
             compilation.setEvents(events);
         }
         compilationRepository.save(compilation);
-        CompilationDto compilation2 = getCompilationById(compId);
-        System.out.println(compilation2);
         return CompilationMapper.mapToCompilationDto(compilation);
     }
 
