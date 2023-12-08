@@ -1,5 +1,7 @@
 package ru.practicum.model.event;
 
+import ru.practicum.model.comment.commentDto.CommentDto;
+import ru.practicum.model.comment.commentDto.NewCommentDto;
 import ru.practicum.model.event.eventDto.EventFullDto;
 import ru.practicum.model.event.eventDto.NewEventDto;
 import ru.practicum.model.event.eventDto.UpdateEventAdminRequest;
@@ -44,4 +46,12 @@ public interface EventService {
     EventFullDto getEventByInitiator(Long userId, Long eventId);
 
     EventFullDto updateEventByInitiator(UpdateEventUserRequest userEvent, Long userId, Long eventId);
+
+    CommentDto createComment(Long eventId, NewCommentDto commentDto, Long userId);
+
+    CommentDto updateCommentByAuthor(NewCommentDto commentDto, Long userId, Long commentId);
+
+    void deleteCommentByUser(Long userId, Long commentId);
+
+    void deleteCommentByAdmin(Long commentId);
 }

@@ -106,5 +106,11 @@ public class AdminController {
         return compilationService.updateCompilation(compId, newCompilationDto);
     }
 
+    @DeleteMapping("/comment/{commentId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteComment(@PathVariable Long commentId) {
+        eventService.deleteCommentByAdmin(commentId);
+    }
+
 
 }
