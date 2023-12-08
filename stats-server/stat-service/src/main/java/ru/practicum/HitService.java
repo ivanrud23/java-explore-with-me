@@ -6,5 +6,5 @@ public interface HitService {
 
     HitDto createHit(HitDto hitDto);
 
-    List<HitStatsDto> getHit(String start, String end, List<String> uris, Boolean unique);
+    List<ViewStats> getHit(String start, String end, List<String> uris, Boolean unique);
 }
